@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:telegram/components/button_with_leading_icon.dart';
 
-class PersonCard extends StatelessWidget {
-  const PersonCard({
+class RoomCard extends StatelessWidget {
+  const RoomCard({
     Key key,
     @required this.size,
     @required this.url,
     @required this.name,
     @required this.description,
     @required this.distance,
-    @required this.mutualFriends,
+    @required this.members,
   }) : super(key: key);
 
   final Size size;
@@ -17,7 +17,7 @@ class PersonCard extends StatelessWidget {
   final String name;
   final String description;
   final double distance;
-  final int mutualFriends;
+  final int members;
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +53,7 @@ class PersonCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Row(
-                      children: [
-                        Icon(Icons.person),
-                        Text("$mutualFriends mutual friends")
-                      ],
+                      children: [Icon(Icons.person), Text("$members members")],
                     ),
                   ),
                   Padding(
@@ -73,8 +70,8 @@ class PersonCard extends StatelessWidget {
                   ),
                   ButtonWithLeadingIcon(
                     size: size,
-                    icon: Icons.person_add,
-                    text: 'Add Friend',
+                    icon: Icons.group_add,
+                    text: 'Join Room',
                     onPress: () {},
                   )
                 ],

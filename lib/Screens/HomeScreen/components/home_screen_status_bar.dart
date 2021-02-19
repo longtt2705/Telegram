@@ -71,7 +71,7 @@ class HomeScreenStatusBar extends StatelessWidget {
                           style: TextStyle(
                               fontStyle: FontStyle.italic, color: Colors.white),
                           decoration: InputDecoration(
-                            hintText: "What's in your mind?",
+                            hintText: "What are you thinking?",
                             hintStyle: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 color: Colors.white),
