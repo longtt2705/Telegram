@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 
 class StatusChangeButton extends StatefulWidget {
+  final width;
+  final double borderWidth;
+  final readOnly;
+  final Color borderColor;
+
+  const StatusChangeButton(
+      {Key key,
+      @required this.width,
+      @required this.borderColor,
+      this.borderWidth = 3.0,
+      this.readOnly = false})
+      : super(key: key);
   @override
   _StatusChangeButtonState createState() => _StatusChangeButtonState();
 }
@@ -10,19 +22,20 @@ class _StatusChangeButtonState extends State<StatusChangeButton> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isOnline = !isOnline;
-        });
+        if (!widget.readOnly)
+          setState(() {
+            isOnline = !isOnline;
+          });
       },
       child: Container(
-        width: size.width * 0.05,
-        height: size.width * 0.05,
+        width: widget.width,
+        height: widget.width,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
+          border:
+              Border.all(color: widget.borderColor, width: widget.borderWidth),
           color: isOnline ? Colors.green : Colors.orange,
         ),
       ),

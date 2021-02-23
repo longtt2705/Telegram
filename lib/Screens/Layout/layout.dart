@@ -18,6 +18,7 @@ class _LayoutState extends State<Layout> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     _pageController = PageController(initialPage: 0);
@@ -26,6 +27,7 @@ class _LayoutState extends State<Layout> {
   @override
   void dispose() {
     _pageController.dispose();
+    // ignore: todo
     // TODO: implement dispose
     super.dispose();
   }

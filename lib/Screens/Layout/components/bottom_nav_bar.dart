@@ -20,6 +20,7 @@ class BottomNavBarState extends State<BottomNavBar> {
   var numberOfNotifications;
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     currentPage = widget._pageController.initialPage;

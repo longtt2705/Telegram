@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
-
 class ButtonWithLeadingIcon extends StatelessWidget {
-  const ButtonWithLeadingIcon({
-    Key key,
-    @required this.size,
-    @required this.text,
-    @required this.icon,
-    @required this.onPress,
-  }) : super(key: key);
+  const ButtonWithLeadingIcon(
+      {Key key,
+      @required this.size,
+      @required this.text,
+      @required this.icon,
+      @required this.onPress,
+      @required this.color,
+      @required this.textColor})
+      : super(key: key);
 
   final Size size;
   final String text;
   final IconData icon;
   final Function onPress;
+  final Color color;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,13 @@ class ButtonWithLeadingIcon extends StatelessWidget {
           ),
           padding: EdgeInsets.only(right: size.width * 0.02),
           onPressed: onPress,
-          color: primaryColor,
+          color: color,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 icon,
-                color: Colors.white,
+                color: textColor,
               ),
               SizedBox(width: size.width * 0.02),
               Text(
@@ -41,7 +43,7 @@ class ButtonWithLeadingIcon extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
-                    color: Colors.white),
+                    color: textColor),
               )
             ],
           )),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telegram/components/button_with_leading_icon.dart';
+import 'package:telegram/constant.dart';
 
 class RoomCard extends StatelessWidget {
   const RoomCard({
@@ -69,6 +70,8 @@ class RoomCard extends StatelessWidget {
                     height: size.height * 0.01,
                   ),
                   ButtonWithLeadingIcon(
+                    color: primaryColor,
+                    textColor: Colors.white,
                     size: size,
                     icon: Icons.group_add,
                     text: 'Join Room',

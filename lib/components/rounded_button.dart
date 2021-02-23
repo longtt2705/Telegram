@@ -4,14 +4,16 @@ class RoundedButton extends StatelessWidget {
   final String text;
   final Function onPress;
   final Color color, textColor;
+  final double circularValue;
 
   const RoundedButton({
     Key key,
-    this.text,
-    this.onPress,
-    this.color,
-    this.textColor,
+    @required this.text,
+    @required this.onPress,
+    @required this.color,
+    @required this.textColor,
     this.stretch = true,
+    this.circularValue = 29,
   }) : super(key: key);
 
   final bool stretch;
@@ -23,7 +25,7 @@ class RoundedButton extends StatelessWidget {
       width: stretch ? size.width * 0.8 : null,
       child: FlatButton(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(29),
+            borderRadius: BorderRadius.circular(circularValue),
           ),
           padding: stretch
               ? EdgeInsets.symmetric(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telegram/components/button_with_leading_icon.dart';
+import 'package:telegram/constant.dart';
 
 class PersonCard extends StatelessWidget {
   const PersonCard({
@@ -72,6 +73,8 @@ class PersonCard extends StatelessWidget {
                     height: size.height * 0.01,
                   ),
                   ButtonWithLeadingIcon(
+                    color: primaryColor,
+                    textColor: Colors.white,
                     size: size,
                     icon: Icons.person_add,
                     text: 'Add Friend',
