@@ -27,7 +27,9 @@ class ButtonWithLeadingIcon extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.only(right: size.width * 0.02),
+          padding: text.length > 0
+              ? EdgeInsets.only(right: size.width * 0.02)
+              : EdgeInsets.zero,
           onPressed: onPress,
           color: color,
           child: Row(
@@ -37,14 +39,15 @@ class ButtonWithLeadingIcon extends StatelessWidget {
                 icon,
                 color: textColor,
               ),
-              SizedBox(width: size.width * 0.02),
-              Text(
-                text,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: textColor),
-              )
+              if (text.length > 0) SizedBox(width: size.width * 0.02),
+              if (text.length > 0)
+                Text(
+                  text,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: textColor),
+                )
             ],
           )),
     );

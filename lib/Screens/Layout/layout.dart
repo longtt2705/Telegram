@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telegram/Screens/ChatScreen/chat_screen.dart';
 import 'package:telegram/Screens/FriendScreen/friend_screen.dart';
 import 'package:telegram/Screens/HomeScreen/home_screen.dart';
-import 'package:telegram/Screens/SearchScreen/search_screen.dart';
-import 'package:telegram/constant.dart';
+import 'package:telegram/Screens/ProfileScreen/profile_screen.dart';
 
 import 'components/bottom_nav_bar.dart';
 
@@ -41,16 +40,10 @@ class _LayoutState extends State<Layout> {
           _key.currentState.refresh();
         },
         controller: _pageController,
-        children: [HomeScreen(), ChatScreen(), FriendScreen(), SearchScreen()],
+        children: [HomeScreen(), ChatScreen(), FriendScreen(), ProfileScreen()],
       ),
       bottomNavigationBar:
           BottomNavBar(key: _key, pageController: _pageController),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: primaryColor,
-        child: Icon(Icons.qr_code),
-      ),
     );
   }
 
