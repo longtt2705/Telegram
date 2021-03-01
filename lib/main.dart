@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:telegram/Screens/Welcome/welcome_screen.dart';
 import 'package:telegram/constant.dart';
+import 'package:redux/redux.dart';
+import 'package:telegram/redux/app_state.dart';
+import 'package:telegram/redux/reducers/root_reducer.dart';
 
 var assets = <String>[
   "assets/images/chatting.svg",
@@ -23,6 +26,9 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final store =
+      new Store<AppState>(rootReducer, initialState: AppState.initial());
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

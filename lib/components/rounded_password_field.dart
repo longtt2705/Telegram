@@ -3,7 +3,7 @@ import 'package:telegram/components/text_field_container.dart';
 
 import '../constant.dart';
 
-class RoundedPasswordField extends StatelessWidget {
+class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final hintText;
   const RoundedPasswordField({
@@ -13,21 +13,43 @@ class RoundedPasswordField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _RoundedPasswordFieldState createState() => _RoundedPasswordFieldState();
+}
+
+class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+  bool isHidden;
+
+  @override
+  void initState() {
+    super.initState();
+    isHidden = true;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
-        obscureText: true,
+        obscureText: isHidden,
         style: TextStyle(color: Colors.white),
-        onChanged: onChanged,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
-            hintText: hintText,
+            hintText: widget.hintText,
             hintStyle:
                 TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
             icon: Icon(
               Icons.lock,
               color: primaryColor,
             ),
-            suffixIcon: Icon(Icons.visibility, color: primaryColor),
+            suffixIcon: IconButton(
+              icon: isHidden
+                  ? Icon(Icons.visibility, color: primaryColor)
+                  : Icon(Icons.visibility_off, color: primaryColor),
+              onPressed: () {
+                setState(() {
+                  isHidden = !isHidden;
+                });
+              },
+            ),
             border: InputBorder.none),
       ),
     );

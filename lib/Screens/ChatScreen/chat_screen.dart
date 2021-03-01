@@ -9,7 +9,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  ScrollController scrollController = new ScrollController();
   var friendList = ["1", "2", "3", "4", "5", "6"];
   var roomList = ["1", "2", "3", "4", "5", "6"];
 
