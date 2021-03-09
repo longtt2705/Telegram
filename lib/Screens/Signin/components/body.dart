@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:telegram/Screens/HomeScreen/home_screen.dart';
 import 'package:telegram/Screens/Signin/components/background.dart';
 import 'package:telegram/Screens/Signup/signup_screen.dart';
 import 'package:telegram/components/already_have_an_account_check.dart';
@@ -8,6 +12,8 @@ import 'package:telegram/components/rounded_input_field.dart';
 import 'package:telegram/components/rounded_password_field.dart';
 import 'package:telegram/constant.dart';
 import 'package:dio/dio.dart';
+import 'package:form_validator/form_validator.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as ss;
 
 class Body extends StatefulWidget {
   @override
@@ -26,14 +32,47 @@ class _BodyState extends State<Body> {
     isLoading = false;
   }
 
+  bool isValidate(String validation) {
+    if (validation != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(validation)));
+      return true;
+    }
+    return false;
+  }
+
   Future<void> signIn() async {
+    var phoneValidate = ValidationBuilder()
+        .phone()
+        .minLength(10, "Phone must have 10 digits")
+        .maxLength(10, "Phone must have 10 digits")
+        .build()(phone);
+    var passwordValidate = ValidationBuilder()
+        .minLength(6, "Password must have at least 6 characters")
+        .build()(password);
+    if (isValidate(phoneValidate) || isValidate(passwordValidate)) return;
     setState(() {
       isLoading = true;
     });
     try {
       var dio = Dio();
-      var response = await dio.get('http://10.0.2.2:8000/account/login');
-      print(response);
+      var response = await dio.post('http://10.0.2.2:8000/account/login',
+          options: Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          }),
+          data: jsonEncode({"phone": phone, "password": password}));
+
+      if (response.data["status"] == statusOk) {
+        final storage = new ss.FlutterSecureStorage();
+        await storage.write(key: "token", value: response.data["message"]);
+
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(response.data["message"])));
+      }
     } catch (e) {
       print(e);
     } finally {
@@ -41,10 +80,6 @@ class _BodyState extends State<Body> {
         isLoading = false;
       });
     }
-
-    // Navigator.of(context).pushAndRemoveUntil(
-    //     MaterialPageRoute(builder: (context) => Layout()),
-    //     (route) => false);
   }
 
   @override

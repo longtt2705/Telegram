@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:telegram/classes/message.dart';
 
 class MessageBox {
